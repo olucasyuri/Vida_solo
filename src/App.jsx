@@ -16,6 +16,7 @@ import Debts          from './pages/Debts'
 import Goals          from './pages/Goals'
 import Shopping       from './pages/Shopping'
 import AnnualSummary  from './pages/AnnualSummary'
+import Recurring      from './pages/Recurring'
 
 function AppLoader() {
   return (
@@ -51,6 +52,7 @@ function ProtectedLayout() {
           <Route path="/"              element={<Dashboard />} />
           <Route path="/receitas"      element={<TransactionsList type="receita" title="Receitas" subtitle="Todas as suas entradas" />} />
           <Route path="/despesas"      element={<TransactionsList type="despesa" title="Despesas" subtitle="Todos os seus gastos" />} />
+          <Route path="/fixos"         element={<Recurring />} />
           <Route path="/a-pagar"       element={<TransactionsList type="despesa" title="A Pagar" subtitle="Contas pendentes" defaultStatus="pendente" />} />
           <Route path="/pagas"         element={<TransactionsList type={null} title="Pagas" subtitle="Lançamentos pagos" defaultStatus="pago" />} />
           <Route path="/metas"         element={<Goals />} />

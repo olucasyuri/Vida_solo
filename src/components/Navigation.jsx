@@ -2,7 +2,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import {
   LayoutDashboard, ArrowDownCircle, ArrowUpCircle, Tags,
   Clock, CheckCircle2, BarChart2, Settings, LogOut,
-  TrendingDown, ShoppingCart, Target, CalendarRange
+  TrendingDown, ShoppingCart, Target, CalendarRange, RefreshCw
 } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
 import { useToast } from '../contexts/ToastContext'
@@ -10,21 +10,22 @@ import { useToast } from '../contexts/ToastContext'
 const navItems = [
   { path: '/', icon: LayoutDashboard, label: 'Dashboard' },
   { section: 'Lançamentos' },
-  { path: '/receitas',  icon: ArrowDownCircle, label: 'Receitas',  color: 'var(--success)' },
-  { path: '/despesas',  icon: ArrowUpCircle,   label: 'Despesas',  color: 'var(--danger)'  },
+  { path: '/receitas',      icon: ArrowDownCircle, label: 'Receitas',        color: 'var(--success)' },
+  { path: '/despesas',      icon: ArrowUpCircle,   label: 'Despesas',        color: 'var(--danger)'  },
+  { path: '/fixos',         icon: RefreshCw,       label: 'Fixos / Recorrentes' },
   { section: 'Controle' },
-  { path: '/a-pagar',  icon: Clock,        label: 'A Pagar', color: 'var(--warning)' },
-  { path: '/pagas',    icon: CheckCircle2, label: 'Pagas',   color: 'var(--success)' },
+  { path: '/a-pagar',       icon: Clock,           label: 'A Pagar',         color: 'var(--warning)' },
+  { path: '/pagas',         icon: CheckCircle2,    label: 'Pagas',           color: 'var(--success)' },
   { section: 'Planejamento' },
-  { path: '/metas',    icon: Target,       label: 'Metas'         },
-  { path: '/dividas',  icon: TrendingDown, label: 'Dívidas', color: 'var(--danger)'  },
-  { path: '/compras',  icon: ShoppingCart, label: 'Lista de Compras' },
+  { path: '/metas',         icon: Target,          label: 'Metas'            },
+  { path: '/dividas',       icon: TrendingDown,    label: 'Dívidas',         color: 'var(--danger)'  },
+  { path: '/compras',       icon: ShoppingCart,    label: 'Lista de Compras' },
   { section: 'Relatórios' },
-  { path: '/relatorios',       icon: BarChart2,    label: 'Relatórios'     },
-  { path: '/resumo-anual',     icon: CalendarRange, label: 'Resumo Anual'  },
-  { section: 'Config' },
-  { path: '/categorias',   icon: Tags,     label: 'Categorias'    },
-  { path: '/configuracoes', icon: Settings, label: 'Configurações' },
+  { path: '/relatorios',    icon: BarChart2,       label: 'Relatórios'       },
+  { path: '/resumo-anual',  icon: CalendarRange,   label: 'Resumo Anual'     },
+  { section: 'Configurações' },
+  { path: '/categorias',    icon: Tags,            label: 'Categorias'       },
+  { path: '/configuracoes', icon: Settings,        label: 'Configurações'    },
 ]
 
 export function Sidebar() {
@@ -32,8 +33,6 @@ export function Sidebar() {
   const toast = useToast()
   const navigate = useNavigate()
   const { pathname } = useLocation()
-
-  const handleSignOut = async () => { await signOut(); toast.info('Saindo...') }
 
   const name = user?.user_metadata?.name || user?.email?.split('@')[0] || 'Usuário'
   const initials = name.split(' ').map(n => n[0]).slice(0,2).join('').toUpperCase()
@@ -71,7 +70,7 @@ export function Sidebar() {
             <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user?.email}</div>
           </div>
         </button>
-        <button className="nav-item" onClick={handleSignOut}>
+        <button className="nav-item" onClick={async () => { await signOut(); toast.info('Saindo...') }}>
           <LogOut size={16} style={{ color: 'var(--danger)' }} />
           <span style={{ color: 'var(--danger)', fontSize: '0.8125rem' }}>Sair</span>
         </button>
@@ -84,7 +83,7 @@ const bottomItems = [
   { path: '/',         icon: LayoutDashboard, label: 'Início'   },
   { path: '/despesas', icon: ArrowUpCircle,   label: 'Despesas' },
   { path: '/receitas', icon: ArrowDownCircle, label: 'Receitas' },
-  { path: '/metas',    icon: Target,          label: 'Metas'    },
+  { path: '/fixos',    icon: RefreshCw,       label: 'Fixos'    },
   { path: '/relatorios', icon: BarChart2,     label: 'Mais'     },
 ]
 
@@ -106,8 +105,7 @@ export function BottomNav({ onAddClick }) {
           const active = pathname === item.path
           return (
             <button key={item.path} className={`bottom-nav-item ${active ? 'active' : ''}`} onClick={() => navigate(item.path)}>
-              <Icon size={22} />
-              {item.label}
+              <Icon size={22} />{item.label}
             </button>
           )
         })}
