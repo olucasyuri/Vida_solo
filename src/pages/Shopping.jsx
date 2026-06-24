@@ -269,9 +269,9 @@ export default function Shopping() {
           )}
         </div>
       ) : (
-        <div className="shopping-layout" style={{ display: 'grid', gridTemplateColumns: '220px 1fr', gap: 16 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr', gap: 16 }}>
           {/* Lists sidebar */}
-          <div className="shopping-sidebar">
+          <div>
             <div className="card" style={{ padding: 12 }}>
               <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 10 }}>Suas listas</div>
               <div style={{ display: 'flex', gap: 6, marginBottom: 10 }}>

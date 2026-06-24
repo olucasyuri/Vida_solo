@@ -125,7 +125,7 @@ export default function Categories() {
       />
 
       {/* Stats */}
-      <div className="categories-form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 20 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 20 }}>
         <div className="card" style={{ padding: '14px 16px' }}>
           <div style={{ fontSize: '0.75rem', color: 'var(--success)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: 4 }}>Receitas</div>
           <div style={{ fontWeight: 800, fontSize: '1.5rem' }}>{receitas.length}</div>

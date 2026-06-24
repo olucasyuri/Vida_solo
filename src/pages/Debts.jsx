@@ -159,7 +159,7 @@ function DebtForm({ isOpen, onClose, onSave, initial }) {
             <Calculator size={14} /> Simular quitação
           </button>
           {sim && (
-            <div className="debts-stats-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, marginTop: 8 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, marginTop: 8 }}>
               {[
                 { label: 'Meses', value: `${sim.months}x` },
                 { label: 'Total pago', value: fmtCurrency(sim.totalPaid) },
@@ -229,7 +229,7 @@ function DebtCard({ debt, onEdit, onDelete, onPay }) {
       {/* Expandable details */}
       {expanded && sim && (
         <div style={{ marginTop: 12, padding: 12, background: 'var(--bg-hover)', borderRadius: 'var(--radius-md)' }}>
-          <div className="debts-stats-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, textAlign: 'center' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, textAlign: 'center' }}>
             {[
               { label: 'Parcelas restantes', value: `${sim.months}x` },
               { label: 'Total a pagar', value: fmtCurrency(sim.totalPaid) },

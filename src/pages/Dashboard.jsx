@@ -112,7 +112,7 @@ export default function Dashboard() {
       </div>
 
       {/* Charts */}
-      <div className="dashboard-charts-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0,2fr) minmax(0,1.2fr)', gap: 16, marginBottom: 24 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,2fr) minmax(0,1.2fr)', gap: 16, marginBottom: 24 }}>
         {/* Area Chart */}
         <div className="card">
           <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>

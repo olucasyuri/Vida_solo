@@ -79,13 +79,24 @@ export function Sidebar() {
   )
 }
 
-const bottomItems = [
+const bottomItemsLeft = [
   { path: '/',         icon: LayoutDashboard, label: 'Início'   },
   { path: '/despesas', icon: ArrowUpCircle,   label: 'Despesas' },
-  { path: '/receitas', icon: ArrowDownCircle, label: 'Receitas' },
-  { path: '/fixos',    icon: RefreshCw,       label: 'Fixos'    },
-  { path: '/relatorios', icon: BarChart2,     label: 'Mais'     },
 ]
+
+const bottomItemsRight = [
+  { path: '/fixos',      icon: RefreshCw,  label: 'Fixos' },
+  { path: '/relatorios', icon: BarChart2,  label: 'Mais'  },
+]
+
+function NavButton({ item, active, navigate }) {
+  const Icon = item.icon
+  return (
+    <button className={`bottom-nav-item ${active ? 'active' : ''}`} onClick={() => navigate(item.path)}>
+      <Icon size={22} />{item.label}
+    </button>
+  )
+}
 
 export function BottomNav({ onAddClick }) {
   const { pathname } = useLocation()
@@ -94,21 +105,18 @@ export function BottomNav({ onAddClick }) {
   return (
     <nav className="bottom-nav">
       <div className="bottom-nav-items">
-        {bottomItems.map((item, i) => {
-          if (i === 2) return (
-            <div key="fab" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
-              <button className="fab" onClick={onAddClick}><item.icon size={22} /></button>
-              <span style={{ fontSize: '0.6rem', color: 'var(--text-muted)' }}>{item.label}</span>
-            </div>
-          )
-          const Icon = item.icon
-          const active = pathname === item.path
-          return (
-            <button key={item.path} className={`bottom-nav-item ${active ? 'active' : ''}`} onClick={() => navigate(item.path)}>
-              <Icon size={22} />{item.label}
-            </button>
-          )
-        })}
+        {bottomItemsLeft.map((item) => (
+          <NavButton key={item.path} item={item} active={pathname === item.path} navigate={navigate} />
+        ))}
+
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
+          <button className="fab" onClick={onAddClick}><ArrowDownCircle size={22} /></button>
+          <span style={{ fontSize: '0.6rem', color: 'var(--text-muted)' }}>Receitas</span>
+        </div>
+
+        {bottomItemsRight.map((item) => (
+          <NavButton key={item.path} item={item} active={pathname === item.path} navigate={navigate} />
+        ))}
       </div>
     </nav>
   )
