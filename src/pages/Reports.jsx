@@ -81,7 +81,7 @@ export default function Reports() {
         </ResponsiveContainer>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(0,1fr)', gap: 16, marginBottom: 20 }}>
+      <div className="dashboard-charts-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(0,1fr)', gap: 16, marginBottom: 20 }}>
         {/* Category Breakdown */}
         <div className="card">
           <h3 style={{ marginBottom: 16 }}>Despesas por Categoria</h3>
